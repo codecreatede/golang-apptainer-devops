@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 )
@@ -58,11 +59,11 @@ var createCmd = &cobra.Command{
 
 func init() {
 	appCmd.Flags().
-		StringVarP(&appinstallsuid, "appinstall-suid", "as", "app-suid", "install the apptainer suid")
+		StringVarP(&appinstallsuid, "appinstall-suid", "s", "app-suid", "install the apptainer suid")
 	appNCmd.Flags().
-		StringVarP(&appinstallnonsuid, "appinstall-nonsuid", "an", "app-non-suid", "install the apptainer non-suid")
+		StringVarP(&appinstallnonsuid, "appinstall-nonsuid", "n", "app-non-suid", "install the apptainer non-suid")
 	createCmd.Flags().
-		StringVarP(&createcontainer, "container-install", "co", "create-container", "create the container from the specific directories")
+		StringVarP(&createcontainer, "container-install", "c", "create-container", "create the container from the specific directories")
 
 	rootCmd.AddCommand(appCmd)
 	rootCmd.AddCommand(appNCmd)
@@ -71,31 +72,36 @@ func init() {
 
 func appfunc(cmd *cobra.Command, args []string) {
 	if appinstallsuid == "yes" {
-		appC := cmd.Execute("sudo", "dnf", "install", "-y", "epel-release")
+		appC := exec.Command("sudo", "dnf", "install", "-y", "epel-release")
 		err := appC.Run()
 		if err != nil {
 			log.Fatal(err)
 		}
-		appCi := cmd.Execute("sudo", "dnf", "install", "-y", "apptainer")
+		appCi := exec.Command("sudo", "dnf", "install", "-y", "apptainer")
 		appErr := appCi.Run()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal(appErr)
 		}
 	}
 }
 
 func appNfunc(cmd *cobra.Command, args []string) {
 	if appinstallsuid == "yes" {
-		appS := cmd.Execute("sudo", "dnf", "install", "-y", "epel-release")
+		appS := exec.Command("sudo", "dnf", "install", "-y", "epel-release")
 		err := appS.Run()
 		if err != nil {
 			log.Fatal(err)
 		}
-		appSi := cmd.Execute("sudo", "dnf", "install", "apptainer-suid")
+		appSi := exec.Command("sudo", "dnf", "install", "apptainer-suid")
 		appErr := appSi.Run()
 		if appErr != nil {
 			log.Fatal(appErr)
 		}
 	}
-	// finished coding the installation and now start to code the sif file creation.
 }
+
+func createfunc(cmd *cobra.Command, args []string) {
+	fmt.Println("will create sif images for appatainer")
+}
+
+// finished coding the installation and now start to code the sif file creation.
