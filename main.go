@@ -101,15 +101,10 @@ type runCommand struct {
 // functions for the appfunc
 func appfunc(cmd *cobra.Command, args []string) {
 	if appinstallsuid == "yes" {
-		appC := exec.Command("sudo", "dnf", "install", "-y", "epel-release")
-		err := appC.Run()
+		appCi, err := exec.Command("sudo", "dnf", "install", "-y", "apptainer").Output()
+		fmt.Println(string(appCi))
 		if err != nil {
 			log.Fatal(err)
-		}
-		appCi := exec.Command("sudo", "dnf", "install", "-y", "apptainer")
-		appErr := appCi.Run()
-		if err != nil {
-			log.Fatal(appErr)
 		}
 	}
 }
@@ -117,16 +112,11 @@ func appfunc(cmd *cobra.Command, args []string) {
 // functions for the appNfunc suid
 
 func appNfunc(cmd *cobra.Command, args []string) {
-	if appinstallsuid == "yes" {
-		appS := exec.Command("sudo", "dnf", "install", "-y", "epel-release")
-		err := appS.Run()
+	if appinstallnonsuid == "yes" {
+		appSi, err := exec.Command("sudo", "dnf", "install", "-y", "apptainer-suid").Output()
+		fmt.Println(string(appSi))
 		if err != nil {
 			log.Fatal(err)
-		}
-		appSi := exec.Command("sudo", "dnf", "install", "apptainer-suid")
-		appErr := appSi.Run()
-		if appErr != nil {
-			log.Fatal(appErr)
 		}
 	}
 }
