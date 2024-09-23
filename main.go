@@ -33,6 +33,7 @@ func main() {
 var (
 	appinstallsuid    string
 	appinstallnonsuid string
+	ubuntu            string
 	createcontainer   string
 	pathfile          string
 	envfile           string
@@ -63,11 +64,19 @@ var createCmd = &cobra.Command{
 	Run:  createfunc,
 }
 
+var ubuntuCmd = &cobra.Command{
+	Use:  "UbuntuInstall",
+	Long: "This will install the Apptainer for the Ubuntu system. You need to define the version that you want to install such as 1.3.4",
+	Run:  ubuntuInst,
+}
+
 func init() {
 	appCmd.Flags().
 		StringVarP(&appinstallsuid, "appinstall-suid", "s", "app-suid", "install the apptainer suid")
 	appNCmd.Flags().
 		StringVarP(&appinstallnonsuid, "appinstall-nonsuid", "n", "app-non-suid", "install the apptainer non-suid")
+	ubuntuCmd.Flags().
+		StringVarP(&ubuntu, "ubuntu-install", "u", "ubuntu-apptainer", "install the apptainer for ubuntu")
 	createCmd.Flags().
 		StringVarP(&createcontainer, "container-install", "c", "create-container", "create the container from the specific directories")
 	createCmd.Flags().
@@ -81,6 +90,7 @@ func init() {
 	rootCmd.AddCommand(appCmd)
 	rootCmd.AddCommand(appNCmd)
 	rootCmd.AddCommand(createCmd)
+	rootCmd.AddCommand(ubuntuCmd)
 }
 
 // struct for the commands
@@ -115,6 +125,24 @@ func appNfunc(cmd *cobra.Command, args []string) {
 	if appinstallnonsuid == "yes" {
 		appSi, err := exec.Command("sudo", "dnf", "install", "-y", "apptainer-suid").Output()
 		fmt.Println(string(appSi))
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+}
+
+// functions for the ubuntu install
+
+func ubuntuInst(cmd *cobra.Command, args []string) {
+	if ubuntu == "yes" {
+		install, err := exec.Command("sudo", "add-apt-repository", "-y", "ppa:apptainer/ppa").
+			Output()
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(install)
+		ubuntInst, err := exec.Command("sudo", "apt", "install", "-y", "apptainer").Output()
+		fmt.Println(string(ubuntInst))
 		if err != nil {
 			log.Fatal(err)
 		}

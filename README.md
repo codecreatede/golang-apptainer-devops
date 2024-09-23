@@ -5,24 +5,24 @@ golang-apptainer-devops
 - add apptainer directories and also creating containers from sanbox diectories. 
 
 ```
-[gauravsablok@ultramarine]~/Desktop/codecreatede/golang-apptainer-devops% \
-go run main.go -h
 This is for the installation of the apptainer images across the system devops
 
 Usage:
   use [command]
 
 Available Commands:
+  UbuntuInstall
   appN
   apps
-  completion  Generate the autocompletion script for the specified shell
+  completion    Generate the autocompletion script for the specified shell
   createApp
-  help        Help about any command
+  help          Help about any command
 
 Flags:
   -h, --help   help for use
 
 Use "use [command] --help" for more information about a command.
+
 ```
 
 - To create the SIF container follow this 
