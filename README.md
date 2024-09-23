@@ -27,7 +27,8 @@ Use "use [command] --help" for more information about a command.
 
 - To create the SIF container follow this 
 ```
-[gauravsablok@ultramarine]~/Desktop/codecreatede/golang-apptainer-devops% go run main.go createApp -h
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang-apptainer-devops% \
+go run main.go createApp -h
 This will write and create the sif files for the Apptainer
 
 Usage:
@@ -42,8 +43,8 @@ Flags:
   -r, --runcommand string          path to the run commands (default "path to the file containing the run commands")
 ```
 
-```
 - example of apptainer installation suid and non-suid
+```
 [gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% \
 go run main.go apps -s yes
 Updating and loading repositories:
