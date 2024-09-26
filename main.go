@@ -39,6 +39,7 @@ var (
 	envfile           string
 	author            string
 	runcom            string
+	ubuntuG           string
 )
 
 var rootCmd = &cobra.Command{
@@ -70,6 +71,12 @@ var ubuntuCmd = &cobra.Command{
 	Run:  ubuntuInst,
 }
 
+var ubuntuGCmd = &cobra.Command{
+	Use:  "UbuntuGInstall",
+	Long: "Installing the Apptainer from the git release",
+	Run:  ubuntuGInst,
+}
+
 func init() {
 	appCmd.Flags().
 		StringVarP(&appinstallsuid, "appinstall-suid", "s", "app-suid", "install the apptainer suid")
@@ -91,6 +98,7 @@ func init() {
 	rootCmd.AddCommand(appNCmd)
 	rootCmd.AddCommand(createCmd)
 	rootCmd.AddCommand(ubuntuCmd)
+	rootCmd.AddCommand(ubuntuGCmd)
 }
 
 // struct for the commands
@@ -145,6 +153,51 @@ func ubuntuInst(cmd *cobra.Command, args []string) {
 		fmt.Println(string(ubuntInst))
 		if err != nil {
 			log.Fatal(err)
+		}
+	}
+}
+
+func ubuntuGInst(cmd *cobra.Command, args []string) {
+	if ubuntuG == "yes" {
+		install, err := exec.Command("sudo", "apt-get", "install", "build-essential").Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(install))
+		}
+		install1, err := exec.Command("sudo", "apt-get", "install", "libfuse3-3", "libfuse3-dev", "libfuse-dev", "uidmap", "squashfs-tools", "-y").
+			Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(install1))
+		}
+		install2, err := exec.Command("sudo", "apt-get", "install", "debhelper", "dh-autoreconf", "devscripts", "help2man", "libarchive-dev", "libssl-dev", "uuid-dev", "golang-go").
+			Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(install2))
+		}
+		appdown, err := exec.Command("wget", "https://github.com/apptainer/apptainer/releases/download/v1.3.4/apptainer-suid_1.3.4_amd64.deb").
+			Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(appdown))
+		}
+		appsuid, err := exec.Command("wget", "https://github.com/apptainer/apptainer/releases/download/v1.3.4/apptainer-suid_1.3.4_amd64.deb").
+			Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(appsuid))
+		}
+		appinstall, err := exec.Command("sudo", "dpkg", "-i", "apptainer_1.3.4_amd64.deb").Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(appinstall))
+		}
+		appsuidinstall, err := exec.Command("sudo", "dpkg", "-i", "apptainer-suid_1.3.4_amd64.deb").
+			Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Println(string(appsuidinstall))
 		}
 	}
 }
