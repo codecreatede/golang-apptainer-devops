@@ -109,5 +109,52 @@ Running transaction
 >>> Stop trigger-install scriptlet: glibc-common-0:2.39-22.fc40.x86_64
 ```
 
+```
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% ls -la
+total 22216
+drwxr-xr-x. 1 gauravsablok gauravsablok     282 Sep 26 13:04 .
+drwxr-xr-x. 1 gauravsablok gauravsablok    1212 Sep 25 22:36 ..
+-rwxr-xr-x. 1 gauravsablok gauravsablok 5674422 Sep 23 07:45 apptainer-golang
+-rw-r--r--. 1 gauravsablok gauravsablok 5683200 Sep 23 10:50 apptainer-golang.fedora.tar
+-rwxr-xr-x. 1 gauravsablok gauravsablok 5676177 Sep 23 10:50 apptainer-golang-ubuntu
+-rw-r--r--. 1 gauravsablok gauravsablok 5683200 Sep 23 10:51 apptainer-golang-ubuntu.tar
+drwxr-xr-x. 1 gauravsablok gauravsablok      44 Sep 23 11:28 command-env-file
+drwxr-xr-x. 1 gauravsablok gauravsablok     166 Sep 23 13:26 .git
+-rw-r--r--. 1 gauravsablok gauravsablok     205 Sep 20 12:05 go.mod
+-rw-r--r--. 1 gauravsablok gauravsablok     896 Sep 20 12:05 go.sum
+-rw-r--r--. 1 gauravsablok gauravsablok    6915 Sep 26 13:04 main.go
+-rw-r--r--. 1 gauravsablok gauravsablok    4910 Sep 23 10:52 README.md
+```
+- installting from the git release on the server 
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% \
+go run main.go -h
+This is for the installation of the apptainer images across the system devops
 
+Usage:
+  use [command]
+
+Available Commands:
+  UbuntuGInstall 
+  UbuntuInstall  
+  appN           
+  apps           
+  completion     Generate the autocompletion script for the specified shell
+  createApp      
+  help           Help about any command
+
+Flags:
+  -h, --help   help for use
+
+Use "use [command] --help" for more information about a command.
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% go run main.go UbuntuGInstall
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% go run main.go UbuntuGInstall -h 
+Installing the Apptainer from the git release
+
+Usage:
+  use UbuntuGInstall [flags]
+
+Flags:
+  -h, --help   help for UbuntuGInstall
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% 
+```
 Gaurav Sablok
