@@ -1,8 +1,8 @@
 golang-apptainer-devops
 
 - a apptainer installation and configuration management for linux systems.
-- creates container and also ports them. 
-- add apptainer directories and also creating containers from sanbox diectories. 
+- creates container and also ports them.
+- add apptainer directories and also creating containers from sanbox diectories.
 
 ```
 This is for the installation of the apptainer images across the system devops
@@ -25,7 +25,7 @@ Use "use [command] --help" for more information about a command.
 
 ```
 
-- To create the SIF container follow this 
+- To create the SIF container follow this
 ```
 [gauravsablok@ultramarine]~/Desktop/codecreatede/golang-apptainer-devops% \
 go run main.go createApp -h
@@ -125,7 +125,8 @@ drwxr-xr-x. 1 gauravsablok gauravsablok     166 Sep 23 13:26 .git
 -rw-r--r--. 1 gauravsablok gauravsablok    6915 Sep 26 13:04 main.go
 -rw-r--r--. 1 gauravsablok gauravsablok    4910 Sep 23 10:52 README.md
 ```
-- installting from the git release on the server 
+- installting from the git release on the server
+```
 [gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% \
 go run main.go -h
 This is for the installation of the apptainer images across the system devops
@@ -134,20 +135,23 @@ Usage:
   use [command]
 
 Available Commands:
-  UbuntuGInstall 
-  UbuntuInstall  
-  appN           
-  apps           
+  UbuntuGInstall
+  UbuntuInstall
+  appN
+  apps
   completion     Generate the autocompletion script for the specified shell
-  createApp      
+  createApp
   help           Help about any command
 
 Flags:
   -h, --help   help for use
 
 Use "use [command] --help" for more information about a command.
-[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% go run main.go UbuntuGInstall
-[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% go run main.go UbuntuGInstall -h 
+```
+- ubuntuG instal directly from the git repository.
+```
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% \
+go run main.go UbuntuGInstall -h
 Installing the Apptainer from the git release
 
 Usage:
@@ -155,6 +159,6 @@ Usage:
 
 Flags:
   -h, --help   help for UbuntuGInstall
-[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops% 
+[gauravsablok@ultramarine]~/Desktop/codecreatede/golang/golang-apptainer-devops%
 ```
 Gaurav Sablok
